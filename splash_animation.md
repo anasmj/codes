@@ -1,3 +1,4 @@
+```
 class SplashView extends ConsumerStatefulWidget {
   const SplashView({
     super.key,
@@ -71,3 +72,4 @@ class _SplashViewState extends ConsumerState<SplashView>
     );
   }
 }
+```
