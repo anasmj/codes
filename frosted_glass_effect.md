@@ -2,14 +2,14 @@
 class FrostedGlassBox extends StatelessWidget {
   const FrostedGlassBox({
     super.key,
-    required this.width,
-    required this.height,
-    this.child,
+    this.width,
+    this.height,
+    required this.child,
   });
 
-  final width;
-  final height;
-  final child;
+  final double? width;
+  final double? height;
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
@@ -59,4 +59,5 @@ class FrostedGlassBox extends StatelessWidget {
     );
   }
 }
+
 ```
