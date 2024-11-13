@@ -36,3 +36,27 @@ await Firebase.initializeApp(
 );
 ```
 10. Specify the minSDKVersion to 19, add firebase_core^latest_versionÏ
+
+11. Adjust your project :
+     In android/build.gradle add:
+```
+ buildscript {
+     ext.kotlin_version = '2.0.20'
+     repositories {
+         google() // add this line
+         mavenCentral()
+     }
+     dependencies {
+         classpath "org.jetbrains.kotlin:compose-compiler-gradle-plugin:2.0.20"
+         classpath 'com.android.tools.build:gradle:7.3.1'
+         classpath 'com.google.gms:google-services:4.3.15'//add latest version
+     }
+ }
+
+```
+
+In the app-level build.gradle file located in android/app, ensure that you apply the google-services plugin at the bottom of the file:
+```
+apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services' // Add this line at the bottom
+```
