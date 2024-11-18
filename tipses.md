@@ -1,5 +1,9 @@
-Make custom chip 
+You can use 
 ```
+ClampingScrollPhysics
+```
+
+Make custom chip 
 
 class CustomChip extends Chip { 
   final BuildContext context;
