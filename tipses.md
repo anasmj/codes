@@ -1,6 +1,7 @@
-You can use 
+You can use the physics to 
 ```
-ClampingScrollPhysics
+ClampingScrollPhysics();
+BounsingScrollPhysics()
 ```
 
 Make custom chip 
