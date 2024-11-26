@@ -69,7 +69,7 @@ class AppUserProvider extends Notifier<Stream<AppUser?>> {
             await _auth.createUserWithEmailAndPassword(
                 email: newAppUser.email!, password: newAppUser.password!);
         User? firebaseUser = userCredential.user;
-        await _firestore.collection('admins').doc(firebaseUser!.uid).set({
+        await _firestore.collection('users').doc(firebaseUser!.uid).set({
           'userName': newAppUser.name,
           'email': newAppUser.email!,
           'password': newAppUser.password!,
