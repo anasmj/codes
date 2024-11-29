@@ -159,4 +159,25 @@ class _SignupState extends ConsumerState<SignUpPage> {
     );
   }
 
+  @override
+  void dispose() {
+    _focusNodeEmail.dispose();
+    _focusNodePassword.dispose();
+    _focusNodeConfirmPassword.dispose();
+    _controllerEmail.dispose();
+    _controllerPassword.dispose();
+    _controllerConfirmPassword.dispose();
+    super.dispose();
+  }
+
+  Validator matchingPassword(String prevPassword) => (String? value) {
+        if (value == null || value.isEmpty) {
+          return "Please enter password.";
+        } else if (value != prevPassword) {
+          return "Password doesn't match.";
+        }
+        return null;
+      };
+}
+
 ```
