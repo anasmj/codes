@@ -1,4 +1,3 @@
-```
 class SignUpPage extends ConsumerStatefulWidget {
   final VoidCallback? onToggleAuthType;
   const SignUpPage({super.key, this.onToggleAuthType});
@@ -179,5 +178,3 @@ class _SignupState extends ConsumerState<SignUpPage> {
         return null;
       };
 }
-
-```
