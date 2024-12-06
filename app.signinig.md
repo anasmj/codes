@@ -100,4 +100,7 @@ key.properties
 app/upload-keystore.jks
 ```
 # Now your .apk or .aab is ready to upload to play console 
-
+the link of your app will be associated with the package id and it will look like below in play store
+```
+https://play.google.com/store/apps/details?id=com.example.myapp
+```
