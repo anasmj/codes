@@ -25,7 +25,10 @@ it will generate a 'upload_keystore.jks' file in the machine
 ### step 3: Place the generated file in your project 
 - place the 'upload-keystore.jks' inside [project]/android/app/
 - In [project]/android/key.properties , provide the location of 'upload-keystore.jks' that you just paced.
-  the line should look like 'storeFile=../app/upload-keystore.jks'
+  the line should look like
+```
+'storeFile=../app/upload-keystore.jks'
+```
 If keystorePassword is incorrect: 
 navigate to home, delete all the keystore password and regenerate .jks file again
 
@@ -60,6 +63,7 @@ android {
             signingConfig = signingConfigs.debug
             signingConfig = signingConfigs.release
         }
+    }
 ```
 Then it should look like this - 
 ```
@@ -83,12 +87,10 @@ android {
             signingConfig = signingConfigs.release
         }
     }
-...
-}
 ```
-### step 4: fromm root directory, run the following command(run flutter clean before if previously built)- 
+### step 4: from root directory, run the following command(run flutter clean before if previously built)- 
 ```
-flutter buld appbundle
+flutter build appbundle
 ```
 or 
 ```
