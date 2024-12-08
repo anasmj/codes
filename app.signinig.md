@@ -7,12 +7,12 @@ storeFile=<keystore-file-location>
 ```
 ### Step 2: Run the following command in terminal
 
-if you're developing from a for mac or linux 
+From from mac or linux 
 ```
 keytool -genkey -v -keystore ~/upload-keystore.jks -keyalg RSA \
         -keysize 2048 -validity 10000 -alias upload
 ```
-And on Windows
+From Windows
 ```
 keytool -genkey -v -keystore $env:USERPROFILE\upload-keystore.jks `
         -storetype JKS -keyalg RSA -keysize 2048 -validity 10000 `
