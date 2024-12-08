@@ -1,4 +1,4 @@
-### step 1: Create a file named [project-name]/android/key.properties that contains a reference to your keystore. There is no spase after '=' sign
+### step 1: Create a file named 'key.properties' in [project-name]/android/ location. Add these lines in the file. There is no spase after '=' sign
 ```
 storePassword=<A random pass that needs to be secured>
 keyPassword=<Same password used in 'storePassword'>
