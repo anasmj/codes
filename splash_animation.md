@@ -1,5 +1,8 @@
 ```
-class SplashView extends ConsumerStatefulWidget {
+import 'package:flutter/material.dart';
+// import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+class SplashView extends StatefulWidget {
   const SplashView({
     super.key,
     required this.duration,
@@ -8,14 +11,13 @@ class SplashView extends ConsumerStatefulWidget {
   final Duration duration;
   final VoidCallback? onFinish;
   @override
-  ConsumerState<SplashView> createState() => _SplashViewState();
+  State<SplashView> createState() => _SplashView();
 }
 
-class _SplashViewState extends ConsumerState<SplashView>
+class _SplashView extends State<SplashView>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
   late final Animation<double> _animation;
-  List<ProfileData> profiles = [];
   @override
   void initState() {
     super.initState();
@@ -66,10 +68,10 @@ class _SplashViewState extends ConsumerState<SplashView>
                   ),
                 ),
               );
-            }
-        ),
+            }),
       ),
     );
   }
 }
+
 ```
