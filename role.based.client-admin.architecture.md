@@ -6,7 +6,8 @@
   - **Client:** Regular users with no admin privileges.
 - **Authentication:**
 
-  - All users (clients, admins, super admins) are authenticated via Firebase Authentication.
+  - Admins,and Super admins are authenticated via Firebase Authentication
+  - Users are register anonymously when they first come to the app. It should be mentioned in the privacy policy. 
   - **Roles and permissions** are managed separately in Firestore or Firebase Realtime Database.
 - **Key Principle:**
 
@@ -16,8 +17,9 @@
   **Step 1: Separate Authentication and Authorization**
   1. Firebase Authentication
     - Use createUserWithEmailAndPassword to create all users (admin, super admin).
+    - User anonymous sign in for users. Link the id if they wants to create an account later.  
     - Every user will have a UID in Firebase Auth.
-  2. **Firestore for Role Management:**
+  3. **Firestore for Role Management:**
       - Store roles and permissions in Firestore. For example:
         ```
         users: {
@@ -67,6 +69,8 @@
   
     ```
   - Prevent login for inactive users by adding a custom claim or checking their status during sign-in.
+**Step 4: Use Anonymous sign in to register new user**
+    - Every time while the app starts check the user type. if new register user anonymously.
 
 ### 3. **Flow**
 **Step 1: Super Admin Adds Admin**
@@ -120,7 +124,7 @@
 }
 
 ```
-### 1. Optional Enhancements
+### 7. Optional Enhancements
 1. **Custom Claims**:
     - Use custom claims in Firebase Auth to manage roles at the token level.
     - Example:
@@ -131,7 +135,71 @@
 3. **Admin SDK for Automation:**
    - Use Firebase Admin SDK to automate tasks like revoking tokens, deleting accounts, and updating roles.
 5. **Notifications:**
-    - Notify admins when their role or status is updated using Firebase Cloud Messaging (FCM).
+    - Notify admins when their role or status is updated using Firebase Cloud Messaging (FCM).6
+
+### 8. User Management
+Steps to Check if the User is Already Registered Anonymously  
+1. When the app initializes, check if there is already a signed-in user (anonymous or registered). Firebase Authentication stores this information locally, so you can retrieve it even after app restarts (as long as app data hasn't been cleared or the app hasn't been reinstalled).
+  ```
+    import 'package:firebase_auth/firebase_auth.dart';
+    
+    void initializeApp() async {
+      User? currentUser = FirebaseAuth.instance.currentUser;
+    
+      if (currentUser == null) {
+        // No user is signed in, sign in anonymously
+        await signInAnonymously();
+      } else {
+        // User already signed in (could be anonymous or registered)
+        print("User already signed in with UID: ${currentUser.uid}");
+      }
+    }
+    
+    Future<void> signInAnonymously() async {
+      try {
+        UserCredential userCredential = await FirebaseAuth.instance.signInAnonymously();
+        print("Signed in anonymously with UID: ${userCredential.user?.uid}");
+      } catch (e) {
+        print("Error signing in anonymously: $e");
+      }
+    }
+  ```
+2. Check for Anonymous User
+    - If the user is already signed in, check if the account is anonymous using the isAnonymous property of the User object.
+        ```
+          void checkIfAnonymousUser() {
+          User? currentUser = FirebaseAuth.instance.currentUser;
+        
+          if (currentUser != null && currentUser.isAnonymous) {
+            print("User is signed in anonymously with UID: ${currentUser.uid}");
+          } else if (currentUser != null) {
+            print("User is signed in with a registered account: ${currentUser.uid}");
+          } else {
+            print("No user is signed in.");
+          }
+        }
+
+        ```
+    - If currentUser exists, use the UID to fetch associated data from Firestore or other services.
+      ```
+        users: {
+        "UID_Anonymous123": {
+          "preferences": {...},
+          "progress": {...}
+        },
+        "UID_Registered456": {
+          "preferences": {...},
+          "progress": {...}
+          }
+        }
+      ```
+
+3. If the user decides to register, you can link their anonymous account to a registered account (email/password, Google, etc.) without creating a new UID:
+    ```
+    final credential = EmailAuthProvider.credential(email: email, password: password);
+    await FirebaseAuth.instance.currentUser?.linkWithCredential(credential);
+
+    ```
 
 
 
