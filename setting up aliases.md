@@ -116,12 +116,12 @@ Run any alias from the `.aliases` file, such as `ll` or `gs`.
        . "$HOME/.aliases"
    fi
    ```
-  or 
-  ```
-  if [ -f ~/.alias ]; then
-      source ~/.alias
-  fi
-  ```
+   or 
+   ```
+   if [ -f ~/.aliases ]; then
+      source ~/.aliases
+   fi
+   ```
 
 4. Save the file and exit (CTRL+O, ENTER, CTRL+X).
 
