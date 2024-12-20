@@ -24,26 +24,38 @@ This file will store all your custom aliases.
 
 ### **Create Aliases in PowerShell**
 1. Open PowerShell.
-2. Add the following line to your PowerShell profile:
+2. Make sure powershell profile exists
+   ```
+   echo $PROFILE
+   ```
+   output should be
+   ```
+   C:\Users\<YourUsername>\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1
+   ```
+   if it not exists, run
+   ```
+   New-Item -ItemType File -Path $PROFILE -Force
+   ```
+3. Add the following line to your PowerShell profile:
    ```powershell
    notepad $PROFILE
    ```
    This opens your PowerShell profile in Notepad.
 
-3. Add the following command to import aliases from `.aliases`:
+4. Add the following command to import aliases from `.aliases`:
    ```powershell
    if (Test-Path "$HOME\.aliases") { . "$HOME\.aliases" }
    ```
 
-4. Save the profile and close Notepad.
+5. Save the profile and close Notepad.
 
-5. Edit the `.aliases` file to add your aliases. Example:
+6. Edit the `.aliases` file to add your aliases. Example:
    ```powershell
    Set-Alias ll "Get-ChildItem -Force"
    Set-Alias gs "git status"
    ```
 
-6. Restart PowerShell or run:
+7. Restart PowerShell or run:
    ```powershell
    . $PROFILE
    ```
