@@ -73,6 +73,12 @@ Try running one of the aliases defined in `.aliases`, such as `ll` or `gs`.
        . "$HOME/.aliases"
    fi
    ```
+   or
+   ```
+    if [ -f ~/.aliases ]; then
+      source ~/.aliases
+    fi
+   ```
    Or, just import the file
    ```
    . ~/.aliases
