@@ -73,16 +73,20 @@ Try running one of the aliases defined in `.aliases`, such as `ll` or `gs`.
        . "$HOME/.aliases"
    fi
    ```
+   Or, just import the file
+   ```
+   . ~/.aliases
+   ```
 
-4. Save the file and exit (CTRL+O, ENTER, CTRL+X).
+5. Save the file and exit (CTRL+O, ENTER, CTRL+X).
 
-5. Edit the `.aliases` file to add your aliases. Example:
+6. Edit the `.aliases` file to add your aliases. Example:
    ```bash
    alias ll="ls -la"
    alias gs="git status"
    ```
 
-6. Reload your shell configuration:
+7. Reload your shell configuration:
    ```bash
    source ~/.zshrc  # Or source ~/.bashrc
    ```
