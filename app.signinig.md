@@ -3,7 +3,7 @@
 storePassword=<A random pass that needs to be secured>
 keyPassword=<Same password used in 'storePassword'>
 keyAlias=upload
-storeFile=<keystore-file-location>
+storeFile=../app/upload-keystore.jks
 ```
 ### Step 2: Run the following command in terminal
 
@@ -27,7 +27,7 @@ it will generate a 'upload_keystore.jks' file in the machine
 - In [project]/android/key.properties , provide the location of 'upload-keystore.jks' that you just paced.
   the line should look like
 ```
-'storeFile=../app/upload-keystore.jks'
+storeFile=../app/upload-keystore.jks
 ```
 If keystorePassword is incorrect: 
 navigate to home, delete all the keystore password and regenerate .jks file again
