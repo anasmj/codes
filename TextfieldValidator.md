@@ -1,10 +1,12 @@
-Copy the code in a dart class 
-```class Validators {
+Copy the code in a dart file
+
+```
+class Validators {
   static final RegExp _phoneRegex = RegExp(r'^01\d{9}$');
   static final _emailRegex =
       RegExp(r"^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$");
 
-  static String? validatePhoneNumber(String? value) {
+  static String? phone(String? value) {
     //11 digits and has to start with 01
     if (value == null || value.isEmpty) {
       return 'Phone number is required';
@@ -13,7 +15,7 @@ Copy the code in a dart class
     return null;
   }
 
-  static String? validateEmail(String? value) {
+  static String? email(String? value) {
     //11 digits and has to start with 01
     if (value == null || value.isEmpty) {
       return 'No Email Found';
