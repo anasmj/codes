@@ -1,4 +1,10 @@
-## Setup with configuration 
+
+## Vscode dart format 
+```
+dartfmt --line-length 120
+```
+## Git 
+### Setup with configuration 
 ```
 git config --global user.name "Your Name"
 git config --global user.email "youremail@example.com"
@@ -6,7 +12,7 @@ git init
 git clone <repository_url>
 
 ```
-## Working with Changes
+### Working with Changes
 ```
 git status
 git add <file_or_folder>
@@ -15,7 +21,7 @@ git commit -m "Your commit message"
 git diff
 
 ```
-## Branch Management
+### Branch Management
 ```
 git branch                 #List, create, or delete branches
 git branch <branch_name>   # Create a new branch
@@ -36,7 +42,7 @@ git reset --hard <commit_hash>   # Undo commit and discard changes
 
 git revert <commit_hash>
 ```
-## Viewing History
+### Viewing History
 ```
 git log
 git log --oneline --graph --decorate  # Compact and visual log
@@ -47,14 +53,14 @@ git blame <file_name>
 
 ```
 
-## Stashing Changes
+### Stashing Changes
 ```
 git stash          # Stash changes
 git stash apply    # Apply the most recent stash
 git stash pop      # Apply and remove the most recent stash
 git stash list     # View stashed changes
 ```
-## Tagging
+### Tagging
 ```
 git tag <tag_name>             # Create a tag
 git tag                        # List tags
@@ -62,7 +68,7 @@ git tag -d <tag_name>          # Delete a tag
 git push origin <tag_name>     # Push a tag
 git push origin --tags         # Push all tags
 ```
-## Tips 
+### Tips 
 ```
 git status
 git commit -am "Message" && git push
