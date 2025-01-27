@@ -1,3 +1,4 @@
+```
 extension StringUtils on String {
   bool get isEmail => _emailRegularExpression.hasMatch(toLowerCase());
 
@@ -8,30 +9,17 @@ extension StringUtils on String {
   String get capitalize => '${this[0].toUpperCase()}${substring(1)}';
 
   bool hasMatch(String v) => toLowerCase().contains(v.toLowerCase());
-}
-
-String pluralize(
-  int number,
-  String form1,
-  String form2, [
-  String? form3,
-]) {
-  final num = number % 100;
-
-  if (num >= 11 && num <= 19) {
-    return form3 ?? form2;
+  /// exampleInput1
+  /// ExampleInput2
+  /// Example input 1
+  /// Example input 2
+  String get standardize {
+    final regex = RegExp(r'([a-z])([A-Z])');
+    String formatted = replaceAllMapped(regex, (match) {
+      return '${match.group(1)} ${match.group(2)}';
+    });
+    return formatted[0].toUpperCase() + formatted.substring(1).toLowerCase();
+    }
   }
 
-  final i = num % 10;
-
-  switch (i) {
-    case 1:
-      return form1;
-    case 2:
-    case 3:
-    case 4:
-      return form2;
-    default:
-      return form3 ?? form2;
-  }
-}
+```
