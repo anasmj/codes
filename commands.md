@@ -45,6 +45,8 @@ git reset --mixed <commit_hash>  # Undo commit, unstage changes
 git reset --hard <commit_hash>   # Undo commit and discard changes
 
 git revert <commit_hash>
+
+
 ```
 ### Viewing History
 ```
@@ -78,4 +80,12 @@ git status
 git commit -am "Message" && git push
 git log --oneline
 ```
+### Git squash (last 3 commits)
+```
+git rebase -i HEAD~3
+```
 
+Remove a file from git tracking 
+```
+git rm --cached <file path>
+```
