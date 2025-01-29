@@ -1,7 +1,7 @@
 
 ## Vscode dart format 
 ```
-dartfmt --line-length 120
+dart format --line-length 120
 ```
 or format a file
 ```
