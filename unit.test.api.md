@@ -57,6 +57,7 @@ void main() {
             //Assert
             expect(user, isA<User>());
           });
+
           test(
               'Given UserRepository class when call getUser and status code is not 200 then throw Exception',
               () {
@@ -66,7 +67,7 @@ void main() {
                 .thenAnswer((i) async => http.Response('{}', 500));
             //Act
             final user = userRepo.getUser();
-            expect(user, throwsException);
+            expectLater(user, throwsException);
             //Assert
           });
         },
@@ -74,4 +75,5 @@ void main() {
     },
   );
 }
+
 ```
