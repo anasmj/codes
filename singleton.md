@@ -1,3 +1,12 @@
+Singleton Pattern 
+```
+class AppDatabase {
+  AppDatabase._();
+  static final _instance = AppDatabase._();
+  static AppDatabase get instance => _instance;
+}
+```
+Example 
 ```
 class LocalDataService {
   static late LocalDataService instance;
