@@ -1,60 +1,50 @@
 A dialog for confirmation from user. 
 ```
 import 'package:flutter/material.dart';
+import 'package:test_app/dialog/confirmation.dialog.dart';
 
 Future<bool?> confirmDialog(
   BuildContext context, {
   String? title,
+  String? subTitle,
   bool? isDismissable,
-  String? cancelButtonText,
-  String? confirmButtonText,
-  String? secondaryTitle,
-  Color? cancelButtonColor,
-  Color? confirmButtonColor,
 }) {
   bool? res;
   return showDialog(
     barrierDismissible: isDismissable ?? true,
     context: context,
     builder: (BuildContext context) => ConfirmationDialog(
-      cancelText: cancelButtonText,
-      confirmText: confirmButtonText,
       title: title,
-      secondaryTitle: secondaryTitle,
-      confirmColor: confirmButtonColor,
-      cancelColor: cancelButtonColor,
-      // onCancel: (v) => Navigator.pop(context,false),
-      onCancel: (v) {
-        res = v;
-        Navigator.pop(context);
-      },
+      subTitle: subTitle,
+      // onCancel: (v) {
+      //   res = v;
+      //   Navigator.pop(context);
+      // },
       onConfirm: (v) {
         res = v;
         Navigator.pop(context);
       },
     ),
-  ).then((value) {
-    return res;
-  });
+  ).then((value) => res);
 }
 
+```
+
+<!--![7eb41136-fe00-42b9-ac58-2b67c19617f3](https://github.com/user-attachments/assets/8e8d717d-01d8-4036-9a85-cc6321658ec9)-->
+<img src="https://github.com/user-attachments/assets/8e8d717d-01d8-4036-9a85-cc6321658ec9" height="100" width ="220">
+
+Animated Confiramtion dialog
+```
 class ConfirmationDialog extends StatefulWidget {
   const ConfirmationDialog({
     super.key,
-    required this.onConfirm,
-    required this.onCancel,
+    this.onConfirm,
+    this.onCancel,
     this.title,
-    this.cancelText = 'Cancel',
-    this.cancelColor,
-    this.confirmText = 'Confirm',
-    this.secondaryTitle,
-    this.confirmColor = Colors.green,
+    this.subTitle,
   });
-  final String? title, cancelText, confirmText;
-  final ValueSetter<bool> onConfirm, onCancel;
-  final Color? confirmColor;
-  final Color? cancelColor;
-  final String? secondaryTitle;
+  final String? title, subTitle;
+  final ValueSetter<bool>? onConfirm, onCancel;
 
   @override
   State<ConfirmationDialog> createState() => _ConfirmationDialogState();
@@ -122,7 +112,7 @@ class _ConfirmationDialogState extends State<ConfirmationDialog>
                               ),
                             ),
                             IconButton(
-                              onPressed: () => widget.onCancel(false),
+                              onPressed: () => Navigator.pop(context),
                               icon: Icon(Icons.close),
                             )
                           ],
@@ -132,11 +122,11 @@ class _ConfirmationDialogState extends State<ConfirmationDialog>
                   ),
                 ],
               ),
-              if (widget.secondaryTitle != null)
+              if (widget.subTitle != null)
                 Padding(
                   padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
-                  child: Text(widget.secondaryTitle ?? '',
-                      style: textTheme.titleSmall),
+                  child:
+                      Text(widget.subTitle ?? '', style: textTheme.titleSmall),
                 ),
               Divider(),
               Padding(
@@ -151,8 +141,8 @@ class _ConfirmationDialogState extends State<ConfirmationDialog>
                         ),
                         foregroundColor: WidgetStatePropertyAll(Colors.black87),
                       ),
-                      child: Text(widget.cancelText ?? 'Cancel'),
-                      onPressed: () => widget.onCancel(false),
+                      child: Text('Cancel'),
+                      onPressed: () => widget.onCancel?.call(false),
                     ),
                     SizedBox(width: 5),
                     ElevatedButton(
@@ -160,8 +150,8 @@ class _ConfirmationDialogState extends State<ConfirmationDialog>
                         backgroundColor: WidgetStatePropertyAll(Colors.red),
                         foregroundColor: WidgetStatePropertyAll(Colors.white),
                       ),
-                      onPressed: () => widget.onConfirm(true),
-                      child: Text(widget.confirmText ?? 'Confirm'),
+                      onPressed: () => widget.onConfirm?.call(true),
+                      child: Text('Confirm'),
                     ),
                   ],
                 ),
@@ -180,5 +170,135 @@ class _ConfirmationDialogState extends State<ConfirmationDialog>
       );
 }
 
+```
+<img src="https://github.com/user-attachments/assets/317f2f0c-b786-4340-bda4-be50d15336d5" height="150" width ="220">
 
+ 
+<!--![608ebf56-7a43-4824-b32a-8275a9afe8e1](https://github.com/user-attachments/assets/317f2f0c-b786-4340-bda4-be50d15336d5)-->
+
+
+Confirmation Dialog with red warning 
+```
+class ConfirmDialogWithRedWarning extends StatelessWidget {
+  const ConfirmDialogWithRedWarning({
+    super.key,
+    this.title,
+    this.subTitle,
+    this.warningText,
+    this.onConfirm,
+    this.onCancel,
+  });
+  final String? title, subTitle, warningText;
+  final ValueSetter<bool>? onConfirm, onCancel;
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+      child: Padding(
+        padding: EdgeInsets.all(10),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  title ?? '',
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                IconButton(
+                  onPressed: () => Navigator.pop(context),
+                  icon: const Icon(Icons.close),
+                )
+              ],
+            ),
+            Text(
+              subTitle ?? '',
+              style: Theme.of(context).textTheme.titleSmall,
+            ),
+            SizedBox(height: 10),
+            Container(
+              color: Colors.red.shade100,
+              child: IntrinsicHeight(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(color: Colors.red, width: 5),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child:
+                          Icon(Icons.warning_amber_rounded, color: Colors.red),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Warning',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium!
+                                  .copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    color: Theme.of(context).colorScheme.error,
+                                  ),
+                            ),
+                            Text(
+                              warningText ?? '',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium!
+                                  .copyWith(
+                                    color: Theme.of(context).colorScheme.error,
+                                  ),
+                            ),
+                            SizedBox(height: 10),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(height: 10),
+            Row(
+              children: [
+                Spacer(),
+                OutlinedButton(
+                  style: buttonStyle.copyWith(
+                    side: WidgetStatePropertyAll(
+                      BorderSide(color: Colors.grey.shade400),
+                    ),
+                    foregroundColor: WidgetStatePropertyAll(Colors.black87),
+                  ),
+                  onPressed: () => Navigator.pop(context, false),
+                  child: Text('Decline'),
+                ),
+                const SizedBox(width: 10),
+                ElevatedButton(
+                  style: buttonStyle.copyWith(
+                    backgroundColor: WidgetStatePropertyAll(Colors.red),
+                    foregroundColor: WidgetStatePropertyAll(Colors.white),
+                  ),
+                  onPressed: () => Navigator.pop(context, true),
+                  child: Text('Proceed'),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  ButtonStyle get buttonStyle => ButtonStyle(
+        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(6.0)),
+        ),
+      );
+}
 ```
