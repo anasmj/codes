@@ -1,8 +1,5 @@
 A dialog for confirmation from user. 
 ```
-import 'package:flutter/material.dart';
-import 'package:test_app/dialog/confirmation.dialog.dart';
-
 Future<bool?> confirmDialog(
   BuildContext context, {
   String? title,
@@ -16,10 +13,10 @@ Future<bool?> confirmDialog(
     builder: (BuildContext context) => ConfirmationDialog(
       title: title,
       subTitle: subTitle,
-      // onCancel: (v) {
-      //   res = v;
-      //   Navigator.pop(context);
-      // },
+      onCancel: (v) {
+        res = v;
+        Navigator.pop(context);
+      },
       onConfirm: (v) {
         res = v;
         Navigator.pop(context);
@@ -27,7 +24,6 @@ Future<bool?> confirmDialog(
     ),
   ).then((value) => res);
 }
-
 ```
 
 <!--![7eb41136-fe00-42b9-ac58-2b67c19617f3](https://github.com/user-attachments/assets/8e8d717d-01d8-4036-9a85-cc6321658ec9)-->
@@ -169,7 +165,6 @@ class _ConfirmationDialogState extends State<ConfirmationDialog>
         ),
       );
 }
-
 ```
 <img src="https://github.com/user-attachments/assets/317f2f0c-b786-4340-bda4-be50d15336d5" height="150" width ="220">
 
@@ -275,7 +270,7 @@ class ConfirmDialogWithRedWarning extends StatelessWidget {
                     ),
                     foregroundColor: WidgetStatePropertyAll(Colors.black87),
                   ),
-                  onPressed: () => Navigator.pop(context, false),
+                  onPressed: () => onConfirm?.call(false),
                   child: Text('Decline'),
                 ),
                 const SizedBox(width: 10),
@@ -284,7 +279,7 @@ class ConfirmDialogWithRedWarning extends StatelessWidget {
                     backgroundColor: WidgetStatePropertyAll(Colors.red),
                     foregroundColor: WidgetStatePropertyAll(Colors.white),
                   ),
-                  onPressed: () => Navigator.pop(context, true),
+                  onPressed: () => onConfirm?.call(true),
                   child: Text('Proceed'),
                 ),
               ],
