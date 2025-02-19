@@ -1,8 +1,9 @@
+### Sharing iOS app with a url
 ```iOS building
 
 flutter build ios  --release
 open the Runner.app file from provided path
-make a folder whose name is Payload
+make a folder named Payload
 Pick the Runner file and put it in the Payload folder.
 Make the Payload folder into a compressed zip file.
 Change the extension .zip to .ipa
