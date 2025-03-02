@@ -83,6 +83,13 @@ git log --oneline
 ### Git squash (last 3 commits)
 ```
 git rebase -i HEAD~3
+git reflog (undo)
+```
+keep backup 
+```
+git stash
+git rebase -i HEAD~X
+git stash pop  # Restore changes after rebase
 ```
 
 Remove a file from git tracking 
