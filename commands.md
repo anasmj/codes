@@ -1,12 +1,4 @@
 
-## Vscode dart format 
-```
-dart format --line-length 120
-```
-or format a file
-```
-dart format --line-length 120 path/to/your/file.dart
-```
 ## Git 
 ### Setup with configuration 
 ```
